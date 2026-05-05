@@ -6,8 +6,19 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/novabank_clientes
     username: postgres
+<<<<<<< HEAD
     password: postgres
   jpa:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+=======
+    password: pon aqui tu contraseña que no me quieres decir
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+>>>>>>> e797e38 (feature(cliente): Acabado todo el cliente-service)
