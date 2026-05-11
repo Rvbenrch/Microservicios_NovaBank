@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
         if (ex.getCause() instanceof UnrecognizedPropertyException unrecognizedPropertyException) {
             mensaje = "El campo '" + unrecognizedPropertyException.getPropertyName() + "' no es modificable en esta operación." +
-                    "";
+                    " ";
         }
 
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, mensaje);
