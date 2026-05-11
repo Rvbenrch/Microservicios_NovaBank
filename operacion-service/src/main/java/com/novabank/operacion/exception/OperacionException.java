@@ -1,4 +1,8 @@
 package com.novabank.operacion.exception;
 
-public class dfghjk {
+public class OperacionException extends RuntimeException {
+
+    public OperacionException(String message) {
+        super(message);
+    }
 }
