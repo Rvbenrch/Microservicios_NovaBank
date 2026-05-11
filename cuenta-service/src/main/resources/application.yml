@@ -1,13 +1,25 @@
+server:
+  port: 8082
+
 spring:
   application:
     name: cuenta-service
+
   config:
     import: optional:configserver:http://localhost:8888
+
   datasource:
     url: jdbc:postgresql://localhost:5432/novabank_cuentas
     username: postgres
-    password: postgres
+    password: 655057621
+
+
   jpa:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
