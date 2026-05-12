@@ -15,6 +15,7 @@ public class MovimientoMapper {
 
         MovimientoDTO dto = new MovimientoDTO();
 
+        dto.setId(movimiento.getId());
         dto.setCuentaId(movimiento.getCuentaId());
         dto.setTipo(movimiento.getTipo());
         dto.setImporte(movimiento.getImporte());
