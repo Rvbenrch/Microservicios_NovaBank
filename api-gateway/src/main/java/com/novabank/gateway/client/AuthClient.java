@@ -3,6 +3,7 @@ package com.novabank.gateway.client;
 import com.novabank.gateway.dto.ValidateResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Component
 public class AuthClient {
@@ -15,12 +16,11 @@ public class AuthClient {
                 .build();
     }
 
-    public ValidateResponse validarToken(String token) {
+    public Mono<ValidateResponse> validarToken(String token) {
         return webClient.get()
                 .uri("/api/auth/validate")
                 .header("Authorization", "Bearer " + token)
                 .retrieve()
-                .bodyToMono(ValidateResponse.class)
-                .block();
+                .bodyToMono(ValidateResponse.class);
     }
 }
