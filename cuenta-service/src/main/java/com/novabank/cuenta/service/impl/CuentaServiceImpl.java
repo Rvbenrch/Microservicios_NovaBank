@@ -15,7 +15,7 @@ import com.novabank.cuenta.repository.MovimientoRepository;
 import com.novabank.cuenta.service.CuentaService;
 import feign.FeignException;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -100,9 +100,10 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
+    @Transactional
     public void ingresar(Long cuentaId, ActualizarSaldoRequest request) {
 
-        Cuenta cuenta = obtenerCuentaEntidad(cuentaId);
+        Cuenta cuenta = obtenerCuentaEntidadBloqueada(cuentaId);
 
         cuenta.setSaldo(
                 cuenta.getSaldo().add(request.getImporte())
@@ -118,9 +119,10 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
+    @Transactional
     public void retirar(Long cuentaId, ActualizarSaldoRequest request) {
 
-        Cuenta cuenta = obtenerCuentaEntidad(cuentaId);
+        Cuenta cuenta = obtenerCuentaEntidadBloqueada(cuentaId);
 
         if (cuenta.getSaldo().compareTo(request.getImporte()) < 0) {
             throw new SaldoInsuficienteException();
@@ -144,7 +146,11 @@ public class CuentaServiceImpl implements CuentaService {
         return cuentaRepository.findById(cuentaId)
                 .orElseThrow(() -> new CuentaNotFoundException(cuentaId));
     }
+    private Cuenta obtenerCuentaEntidadBloqueada(Long cuentaId) {
 
+        return cuentaRepository.findByIdForUpdate(cuentaId)
+                .orElseThrow(() -> new CuentaNotFoundException(cuentaId));
+    }
     private void validarClienteExiste(Long clienteId) {
 
         try {
