@@ -51,4 +51,8 @@ public class MovimientoDTO {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
