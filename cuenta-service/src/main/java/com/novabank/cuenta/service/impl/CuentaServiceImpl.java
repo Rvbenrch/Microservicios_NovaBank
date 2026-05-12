@@ -182,4 +182,11 @@ public class CuentaServiceImpl implements CuentaService {
 
         movimientoRepository.save(movimiento);
     }
+    @Override
+    public List<CuentaDTO> listarCuentas() {
+        return cuentaRepository.findAll()
+                .stream()
+                .map(cuentaMapper::toDTO)
+                .toList();
+    }
 }
