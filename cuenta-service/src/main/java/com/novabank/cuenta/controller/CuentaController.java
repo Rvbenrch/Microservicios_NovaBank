@@ -81,4 +81,8 @@ public class CuentaController {
 
         cuentaService.retirar(id, request);
     }
+    @GetMapping
+    public List<CuentaDTO> listarCuentas() {
+        return cuentaService.listarCuentas();
+    }
 }

@@ -12,7 +12,7 @@ public interface CuentaService {
     List<CuentaDTO> listarCuentasPorCliente(Long clienteId);
 
     CuentaDTO obtenerCuentaPorId(Long id);
-
+    List<CuentaDTO> listarCuentas();
     CuentaDTO obtenerCuentaPorNumero(String numeroCuenta);
 
     CuentaDTO crearCuenta(CrearCuentaRequest request);
